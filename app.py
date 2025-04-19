@@ -11,8 +11,18 @@ warnings.filterwarnings("ignore", category=UserWarning)
 
 # Load model once
 @st.cache_resource
+@st.cache_resource
 def load_model():
-    return YOLO("model.pt")
+    try:
+        st.info("Loading YOLO model...")
+        model = YOLO("model.pt")
+        st.success("Model loaded successfully!")
+        return model
+    except Exception as e:
+        st.error("Failed to load the model.")
+        st.exception(e)
+        raise
+
 
 model = load_model()
 
