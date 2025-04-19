@@ -9,10 +9,9 @@ import warnings
 warnings.filterwarnings("ignore", category=UserWarning)
 
 
-# Load model once
 @st.cache_resource
 def load_model():
-    return YOLO(r"model.pt")
+    return YOLO('model.pt', task='detect', overrides={'weights_only': False})
 
 model = load_model()
 
