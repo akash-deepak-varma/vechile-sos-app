@@ -2,6 +2,9 @@ import streamlit as st
 import cv2
 import numpy as np
 from ultralytics import YOLO
+from torch.serialization import safe_globals
+#rom ultralytics import YOLO
+from ultralytics.nn.tasks import DetectionModel
 import os
 from PIL import Image as PILImage
 from colors import get_dominant_color, rgb_to_name
@@ -10,7 +13,6 @@ warnings.filterwarnings("ignore", category=UserWarning)
 
 
 # Load model once
-@st.cache_resource
 @st.cache_resource
 def load_model():
     try:
