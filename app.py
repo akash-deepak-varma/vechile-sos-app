@@ -14,16 +14,19 @@ warnings.filterwarnings("ignore", category=UserWarning)
 
 # Load model once
 @st.cache_resource
+@st.cache_resource
 def load_model():
     try:
-        st.info("Loading YOLO model...")
-        model = YOLO("model.pt")
-        st.success("Model loaded successfully!")
+        st.info("Loading YOLO model (weights-only)...")
+        model = YOLO("yolov8n.pt")  # or yolov8s.pt if you trained with it
+        model.model.load_state_dict(torch.load("model_weights_only.pt", map_location="cpu"))
+        st.success("Model loaded successfully with weights only!")
         return model
     except Exception as e:
         st.error("Failed to load the model.")
         st.exception(e)
         raise
+
 
 
 model = load_model()
