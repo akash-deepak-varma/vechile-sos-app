@@ -29,7 +29,9 @@ def load_model():
 
 
 
-model = load_model()
+with st.spinner("Loading model..."):
+    model = load_model()
+
 
 # Class names
 class_names = ['truck', 'person', 'traffic sign', 'rider', 'car', 'motorcycle', 'animal',
